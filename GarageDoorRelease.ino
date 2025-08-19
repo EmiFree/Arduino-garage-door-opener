@@ -2,6 +2,8 @@
   int led = 13;
   int doorTrigger = 12;
   int upVal = 0;
+// *1 : reverse upVal values depending on the sensor you are using. This guide uses a proximity sensor where HIGH = nothing in range
+//      and LOW = something in range. make sure to change if needed in main loop and doorState switch case
 
 
 // Uncomment the following line to enable serial debug output
@@ -41,7 +43,7 @@
         {
           case true:                              //case true is a request to close the door
             if (upVal == LOW)                     //only close the door if the proximity sensor has something in front of it (the door is open)
-            {
+            {                                     //* Read *1
               digitalWrite(doorTrigger, HIGH);    //simulate a press on the garage remote button
               delay(510);
               digitalWrite(doorTrigger, LOW);
@@ -57,7 +59,7 @@
       
           case false:                             //case false is a request to open the door
             if (upVal == HIGH)                    //only open the door if the proximity sensor has nothing in front of it (the door is closed)
-            {
+            {                                     //* Read *1
               digitalWrite(doorTrigger, HIGH);    //simulate a press on the garage remote button
               delay(510);
               digitalWrite(doorTrigger, LOW);
@@ -114,7 +116,6 @@ void setup() {
 
 /*
  * Made from garage door sample code
- * These comments were included in the sample code
  * If you encounter any issues:
  * - check the readme.md at https://github.com/sinricpro/esp8266-esp32-sdk/blob/master/README.md
  * - ensure all dependent libraries are installed
@@ -124,3 +125,4 @@ void setup() {
  * - check full user documentation at https://sinricpro.github.io/esp8266-esp32-sdk
  * - visit https://github.com/sinricpro/esp8266-esp32-sdk/issues and check for existing issues or open a new one
  */
+
